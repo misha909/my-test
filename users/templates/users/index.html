@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load mathfilters %}
+
+{% block body %}
+<style type="text/css">
+.div-table{
+  display:table;         
+  width:auto;         
+  background-color:#eee;         
+  border:1px solid  #666666;         
+  border-spacing:5px;/*cellspacing:poor IE support for  this*/
+}
+.div-table-row{
+  display:table-row;
+  width:auto;
+  clear:both;
+}
+.div-table-col{
+  float:left;/*fix for  buggy browsers*/
+  display:table-column;         
+  width:200px;         
+  background-color:#ccc;  
+}
+</style>
+    {% if users %}
+        <div style="text-align:right"><a href="{% url 'users:download' %}">download>>></a></div>
+        <div class="div-table">
+            <div class="div-table-row">
+                <div class="div-table-col">Username</div>
+                <div class="div-table-col">Birthday</div>
+                <div class="div-table-col">Eligible</div>
+                <div class="div-table-col">Random Number</div>
+                <div class="div-table-col">BizzFuzz</div>
+                <div class="div-table-col">Action</div>
+            </div>
+            {% for user in users %}
+            <div class="div-table-row">
+                <div class="div-table-col">{{ user.user.username }}</div>
+                <div class="div-table-col">{{ user.birthday.year }}-{{ user.birthday.month }}-{{ user.birthday.day }}</div>
+                <div>{% now "Y" as current_year %}</div>
+                {% if current_year|sub:user.birthday.year > 13 %}
+                    <div class="div-table-col">allowed</div>
+                {% else %}
+                    <div class="div-table-col">blocked</div>
+                {% endif %}
+                <div class="div-table-col">{{ user.random_num }}</div>
+                {% if user.random_num|mod:5 == 0 and user.random_num|mod:3 == 0 %}
+                <div class="div-table-col">BizzFuzz</div>
+                {% elif user.random_num|mod:3 == 0 %}
+                <div class="div-table-col">Bizz</div>
+                {% elif user.random_num|mod:5 == 0 %}
+                <div class="div-table-col">Fuzz</div>
+                {% else %}
+                <div class="div-table-col">{{ user.random_num }}</div>
+                {% endif %}
+                <div class="div-table-col">
+                    <a href="{% url 'users:edit' user_id=user.user.id %}">edit</a>/<a href="{% url 'users:delete' user_id=user.user.id %}">delete</a></div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No users are available.</p>
+    {% endif %}
+{% endblock body %}

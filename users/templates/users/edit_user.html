@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <form method="post" action="{% url 'users:edit' user_id=user.id %}">
+    {% csrf_token %}
+        User Name:</br>
+        <input type="text" name="username" value="{{ user.username }}"></br>
+        Birthday:</br>
+        <input type="text" name="birthday" value="{{ custom_user.birthday.year }}-{{ custom_user.birthday.month }}-{{ custom_user.birthday.day }}"></br></br>
+        <center><input type="submit" value="Modify"></center>
+    </form>
+{% endblock body %}

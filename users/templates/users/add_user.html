@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <form method="post" action="{% url 'users:add' %}">
+    {% csrf_token %}
+        User Name:</br>
+        <input type="text" name="username"></br>
+        Birthday:</br>
+        <input type="text" name="birthday"></br></br>
+        <center><input type="submit" value="Add User"></center>
+    </form>
+{% endblock body %}

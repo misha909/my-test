@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>This is a test project</title>
+    </head>
+    <body>
+        <div class='container'>
+            <div class='left-side' style="width:100px;float:left;">
+                <ul>
+                    <li><a href="{% url 'users:index' %}">all users</a></li>
+                    <li><a href="{% url 'users:add' %}">add user</a></li>
+                </ul>
+            </div>
+            <div class='right-side' style="float:left;">
+                {% block body %}
+                {% endblock body %}
+            </div>
+        </div>
+    </body>
+</html>
