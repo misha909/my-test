@@ -1,0 +1,15 @@
+appdirs==1.4.0
+Django==1.9
+django-excel==0.0.6
+django-mathfilters==0.4.0
+docopt==0.6.2
+packaging==16.8
+pipreqs==0.4.6
+pyexcel==0.4.4
+pyexcel-io==0.3.2
+pyexcel-webio==0.0.10
+pyparsing==2.1.10
+requests==2.13.0
+six==1.10.0
+texttable==0.8.7
+yarg==0.1.9
